@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inclusão e Segurança Digital Local — Projeto de Extensão</title>
+  <title>Vitrines Locais e Dicas de Segurança — Projeto de Faculdade</title>
   <style>
     :root {
       --primary: #0f766e;
@@ -196,87 +196,81 @@
 <body>
   <div class="wrapper">
     <header>
-      <h1>Inclusão e Segurança Digital Local</h1>
-      <p>Projeto de Extensão Universitária — Faculdade Anhanguera</p>
+      <h1>Vitrines Locais e Dicas de Segurança</h1>
+      <p>Atividade de extensão feita por estudante de faculdade — Ricardo Santos</p>
     </header>
 
     <div class="tabs">
       <button class="tab-btn active" onclick="openTab('vitrines', this)">Vitrines Locais</button>
-      <button class="tab-btn" onclick="openTab('seguranca', this)">Guia Contra Golpes</button>
+      <button class="tab-btn" onclick="openTab('seguranca', this)">Dicas Contra Golpes</button>
     </div>
 
-    <!-- ABA 1: VITRINES DIGITAIS -->
     <div id="vitrines" class="section active">
       <div id="providers-container"></div>
     </div>
 
-    <!-- ABA 2: GUIA DE SEGURANÇA -->
     <div id="seguranca" class="section">
       <div class="guide-box">
-        <h2>Como se proteger de golpes no Pix e WhatsApp</h2>
+        <h2>Cuidados básicos no Pix e no WhatsApp</h2>
         <div class="tip">
-          <strong>1. Parente pedindo dinheiro com número novo</strong>
-          Nunca transfira valores antes de ligar para o número antigo do familiar ou fazer chamada de vídeo para confirmar.
+          <strong>1. Número novo pedindo dinheiro</strong>
+          Antes de mandar qualquer Pix, ligue para o número antigo da pessoa ou faça chamada de vídeo para ter certeza.
         </div>
         <div class="tip">
-          <strong>2. Comprovante de Pix falso (Para Comerciantes)</strong>
-          Só libere o produto ou serviço após abrir o aplicativo do seu próprio banco e confirmar o dinheiro no extrato.
+          <strong>2. Comprovante de Pix (pra quem vende)</strong>
+          Só entregue o produto ou serviço depois de abrir o app do seu banco e ver o dinheiro caindo na conta.
         </div>
         <div class="tip">
-          <strong>3. Links de bloqueio de conta ou entrega parada</strong>
-          Bancos e Correios não pedem senhas, códigos SMS ou dados de cartão por links enviados no WhatsApp ou SMS.
+          <strong>3. Links estranhos por mensagem</strong>
+          Evite clicar em links de entrega, conta bloqueada ou promoção mandados por SMS ou WhatsApp.
         </div>
         <div class="tip">
-          <strong>4. Ative a Confirmação em Duas Etapas no WhatsApp</strong>
-          Vá em Configurações &gt; Conta &gt; Confirmação em duas etapas &gt; Ativar e crie um PIN de 6 dígitos para impedir clonagem.
+          <strong>4. Confirmação em duas etapas no WhatsApp</strong>
+          Em Configurações &gt; Conta &gt; Confirmação em duas etapas, ative um PIN de 6 números para dificultar invasão na conta.
         </div>
       </div>
     </div>
 
     <div class="cta-box">
-      <p>Participou ou acessou este projeto? Avalie em 30 segundos para ajudar na comprovação acadêmica:</p>
-      <a id="form-link" class="btn-form" href="https://forms.google.com" target="_blank" rel="noopener">Responder Formulário de Avaliação</a>
+      <p>Se você testou a página ou leu as dicas, responde rapidinho pra ajudar no meu trabalho da faculdade:</p>
+      <a id="form-link" class="btn-form" href="https://forms.google.com" target="_blank" rel="noopener">Abrir formulário de avaliação</a>
     </div>
 
     <footer>
-      Desenvolvido por Ricardo Santos — Projeto de Extensão Universitária (Anhanguera)
+      Feito por Ricardo Santos (estudante de faculdade) — Projeto de extensão na comunidade
     </footer>
   </div>
 
   <script>
-    // =========================================================================
-    // IMPORTANTE: Insira APENAS números de WhatsApp de participantes reais que
-    // autorizaram a divulgação (formato: 55 + DDD + número, ex: "5584900000000").
-    // Enquanto o campo "whatsapp" estiver vazio (""), o botão fica bloqueado
-    // para evitar redirecionamento acidental para desconhecidos.
-    // =========================================================================
+    // Coloque apenas números de pessoas que autorizaram (55 + DDD + número, ex: "5584900000000").
+    // Se ficar vazio (""), o botão fica bloqueado pra não ir pra número de desconhecido.
     const PROJETO_CONFIG = {
-      linkFormulario: "https://forms.google.com", // Substitua pelo link do seu Google Forms
+      linkFormulario: "https://forms.google.com",
       prestadores: [
         {
-          iniciais: "P1",
-          nome: "Participante 1 — Prestador(a) de Serviço",
-          descricao: "Manutenção e serviços gerais residenciais (Modelo de Vitrine)",
-          whatsapp: "", // Deixe vazio até inserir o número autorizado pelo participante
-          mensagem: "Olá! Vi sua vitrine no Projeto de Extensão Digital e gostaria de um orçamento.",
+          iniciais: "C1",
+          nome: "Contato 1 — Serviço Local",
+          descricao: "Atendimento e serviços do bairro (editar com dados reais)",
+          whatsapp: "",
+          mensagem: "Oi! Vi seu contato na página do projeto da faculdade e queria tirar uma dúvida.",
           horario: "Seg a Sáb, 08h às 18h",
-          pagamento: "Pix, Dinheiro e Cartão",
+          pagamento: "Pix, dinheiro e cartão",
           servicos: [
-            { nome: "Serviço / Atendimento 1", valor: "Sob consulta" },
-            { nome: "Serviço / Atendimento 2", valor: "Sob consulta" }
+            { nome: "Serviço 1", valor: "A combinar" },
+            { nome: "Serviço 2", valor: "A combinar" }
           ]
         },
         {
-          iniciais: "P2",
-          nome: "Participante 2 — Comércio Local",
-          descricao: "Produtos artesanais e encomendas locais (Modelo de Vitrine)",
-          whatsapp: "", // Deixe vazio até inserir o número autorizado pelo participante
-          mensagem: "Olá! Vi sua vitrine no Projeto de Extensão Digital e gostaria de mais informações.",
+          iniciais: "C2",
+          nome: "Contato 2 — Comércio Local",
+          descricao: "Vendas e encomendas da região (editar com dados reais)",
+          whatsapp: "",
+          mensagem: "Oi! Vi sua página no projeto da faculdade e queria saber mais sobre os itens.",
           horario: "Ter a Dom, 09h às 19h",
-          pagamento: "Pix e Dinheiro",
+          pagamento: "Pix e dinheiro",
           servicos: [
-            { nome: "Produto / Encomenda 1", valor: "Sob consulta" },
-            { nome: "Produto / Encomenda 2", valor: "Sob consulta" }
+            { nome: "Item / Serviço 1", valor: "A combinar" },
+            { nome: "Item / Serviço 2", valor: "A combinar" }
           ]
         }
       ]
@@ -294,7 +288,7 @@
       const temNumero = numeroLimpo.length >= 12;
       const btnHtml = temNumero
         ? `<a class="btn-wpp" href="https://wa.me/${numeroLimpo}?text=${encodeURIComponent(p.mensagem)}" target="_blank" rel="noopener">Chamar no WhatsApp</a>`
-        : `<span class="btn-wpp disabled">Contato WhatsApp (Aguardando número autorizado)</span>`;
+        : `<span class="btn-wpp disabled">WhatsApp bloqueado (adicione número autorizado)</span>`;
 
       container.innerHTML += `
         <div class="provider-card">
@@ -307,7 +301,7 @@
           </div>
           <ul class="service-list">${servicosHtml}</ul>
           <div class="meta">
-            <strong>Atendimento:</strong> ${p.horario} &bull; <strong>Pagamento:</strong> ${p.pagamento}
+            <strong>Horário:</strong> ${p.horario} &bull; <strong>Pagamento:</strong> ${p.pagamento}
           </div>
           ${btnHtml}
         </div>
