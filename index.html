@@ -13,6 +13,7 @@
       --text: #1e293b;
       --muted: #64748b;
       --whatsapp: #25d366;
+      --disabled: #94a3b8;
       --border: #e2e8f0;
     }
 
@@ -43,7 +44,6 @@
     header h1 { font-size: 1.45rem; margin-bottom: 4px; }
     header p { font-size: 0.92rem; opacity: 0.92; }
 
-    /* Navegação por Abas */
     .tabs {
       display: flex;
       gap: 8px;
@@ -75,7 +75,6 @@
     .section { display: none; }
     .section.active { display: block; }
 
-    /* Cards dos Prestadores */
     .provider-card {
       background: var(--card);
       border-radius: 14px;
@@ -141,7 +140,12 @@
       font-size: 0.95rem;
     }
 
-    /* Guia de Segurança */
+    .btn-wpp.disabled {
+      background: var(--disabled);
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
     .guide-box {
       background: var(--card);
       border-radius: 14px;
@@ -161,7 +165,6 @@
     }
     .tip strong { display: block; color: #854d0e; margin-bottom: 4px; }
 
-    /* Avaliação */
     .cta-box {
       background: var(--card);
       border-radius: 14px;
@@ -232,7 +235,7 @@
 
     <div class="cta-box">
       <p>Participou ou acessou este projeto? Avalie em 30 segundos para ajudar na comprovação acadêmica:</p>
-      <a id="form-link" class="btn-form" href="https://forms.google.com" target="_blank">Responder Formulário de Avaliação</a>
+      <a id="form-link" class="btn-form" href="https://forms.google.com" target="_blank" rel="noopener">Responder Formulário de Avaliação</a>
     </div>
 
     <footer>
@@ -241,38 +244,39 @@
   </div>
 
   <script>
-    // ========================================================
-    // EDITE APENAS ESTA LISTA PARA PERSONALIZAR OS PARTICIPANTES
-    // ========================================================
+    // =========================================================================
+    // IMPORTANTE: Insira APENAS números de WhatsApp de participantes reais que
+    // autorizaram a divulgação (formato: 55 + DDD + número, ex: "5584900000000").
+    // Enquanto o campo "whatsapp" estiver vazio (""), o botão fica bloqueado
+    // para evitar redirecionamento acidental para desconhecidos.
+    // =========================================================================
     const PROJETO_CONFIG = {
-      linkFormulario: "https://forms.google.com", // Cole aqui o link real do seu Google Forms
+      linkFormulario: "https://forms.google.com", // Substitua pelo link do seu Google Forms
       prestadores: [
         {
-          iniciais: "JS",
-          nome: "João Silva - Eletricista",
-          descricao: "Instalações e manutenções elétricas residenciais",
-          whatsapp: "5584999999999",
-          mensagem: "Olá! Vi seu contato no Projeto de Extensão Digital e gostaria de um orçamento.",
+          iniciais: "P1",
+          nome: "Participante 1 — Prestador(a) de Serviço",
+          descricao: "Manutenção e serviços gerais residenciais (Modelo de Vitrine)",
+          whatsapp: "", // Deixe vazio até inserir o número autorizado pelo participante
+          mensagem: "Olá! Vi sua vitrine no Projeto de Extensão Digital e gostaria de um orçamento.",
           horario: "Seg a Sáb, 08h às 18h",
           pagamento: "Pix, Dinheiro e Cartão",
           servicos: [
-            { nome: "Instalação de chuveiro elétrico", valor: "A partir de R$ 60" },
-            { nome: "Troca de tomadas e disjuntores", valor: "A partir de R$ 50" },
-            { nome: "Revisão elétrica geral", valor: "Sob consulta" }
+            { nome: "Serviço / Atendimento 1", valor: "Sob consulta" },
+            { nome: "Serviço / Atendimento 2", valor: "Sob consulta" }
           ]
         },
         {
-          iniciais: "MO",
-          nome: "Maria Oliveira - Confeitaria Artesanal",
-          descricao: "Bolos caseiros, doces e encomendas para festas",
-          whatsapp: "5584988888888",
-          mensagem: "Olá! Vi seu cardápio digital e gostaria de fazer uma encomenda.",
+          iniciais: "P2",
+          nome: "Participante 2 — Comércio Local",
+          descricao: "Produtos artesanais e encomendas locais (Modelo de Vitrine)",
+          whatsapp: "", // Deixe vazio até inserir o número autorizado pelo participante
+          mensagem: "Olá! Vi sua vitrine no Projeto de Extensão Digital e gostaria de mais informações.",
           horario: "Ter a Dom, 09h às 19h",
           pagamento: "Pix e Dinheiro",
           servicos: [
-            { nome: "Bolo caseiro tradicional", valor: "R$ 35,00" },
-            { nome: "Cento de docinhos variados", valor: "R$ 85,00" },
-            { nome: "Bolo decorado sob encomenda", valor: "A partir de R$ 90" }
+            { nome: "Produto / Encomenda 1", valor: "Sob consulta" },
+            { nome: "Produto / Encomenda 2", valor: "Sob consulta" }
           ]
         }
       ]
@@ -285,7 +289,12 @@
       const servicosHtml = p.servicos
         .map(s => `<li><span>${s.nome}</span><span class="price">${s.valor}</span></li>`)
         .join("");
-      const wppUrl = `https://wa.me/${p.whatsapp}?text=${encodeURIComponent(p.mensagem)}`;
+
+      const numeroLimpo = (p.whatsapp || "").replace(/\D/g, "");
+      const temNumero = numeroLimpo.length >= 12;
+      const btnHtml = temNumero
+        ? `<a class="btn-wpp" href="https://wa.me/${numeroLimpo}?text=${encodeURIComponent(p.mensagem)}" target="_blank" rel="noopener">Chamar no WhatsApp</a>`
+        : `<span class="btn-wpp disabled">Contato WhatsApp (Aguardando número autorizado)</span>`;
 
       container.innerHTML += `
         <div class="provider-card">
@@ -300,7 +309,7 @@
           <div class="meta">
             <strong>Atendimento:</strong> ${p.horario} &bull; <strong>Pagamento:</strong> ${p.pagamento}
           </div>
-          <a class="btn-wpp" href="${wppUrl}" target="_blank">Chamar no WhatsApp</a>
+          ${btnHtml}
         </div>
       `;
     });
